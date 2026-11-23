@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @DataJpaTest
@@ -69,6 +70,7 @@ class OrderRepoTest {
                 .lineOrderList(null)
                 .price(new BigDecimal(13.55))
                 .status(OrderStatus.SUBMIT)
+                .createdDateTime(LocalDateTime.now())
                 .build();
 
     }
