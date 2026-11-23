@@ -16,6 +16,7 @@
   <img src="https://img.shields.io/badge/WebSocket-010101?style=flat-square&logo=socketdotio&logoColor=white" alt="WebSocket"/>
   <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white" alt="Docker"/>
   <img src="https://img.shields.io/badge/License-MIT-e94f5f?style=flat-square" alt="MIT"/>
+  <a href="https://github.com/Pelosin/Paprika-API/actions/workflows/ci.yml"><img src="https://github.com/Pelosin/Paprika-API/actions/workflows/ci.yml/badge.svg" alt="CI"/></a>
 </p>
 
 ---
@@ -71,6 +72,15 @@ docker compose up -d
 ```
 
 Build a jar: `./mvnw clean package`
+
+## ⚙️ Environment variables
+
+| Variable | Description | Default |
+|---|---|---|
+| `JWT_SECRET` | **Required** — JWT signing key (`openssl rand -base64 48`) | none — the app fails to start without it |
+| `JWT_EXPIRATION_MS` | Token lifetime in ms | `86400000` (24h) |
+| `DB_URL` | JDBC URL | local MySQL `pap` schema |
+| `DB_USERNAME` / `DB_PASSWORD` | Database credentials | `root` / `root` (dev only) |
 
 ## 🔗 The Paprika family
 

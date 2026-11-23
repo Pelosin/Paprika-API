@@ -1,0 +1,56 @@
+package com.paprika.api.service.serviceImplementation;
+
+import com.paprika.api.domain.Food;
+import com.paprika.api.mapper.FoodMapper;
+import com.paprika.api.payload.response.FoodResponse;
+import com.paprika.api.repo.FoodRepo;
+import com.paprika.api.service.FoodService;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+import org.apache.juli.logging.Log;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+@RequiredArgsConstructor
+@Log4j2
+public class FoodServiceImpl implements FoodService {
+
+    private final @NonNull FoodRepo foodRepo;
+    private final @NonNull FoodMapper foodMapper;
+
+    @Override
+    public List<FoodResponse> getAllFood() {
+        List<FoodResponse> foodResponseList = foodMapper.toFoods(foodRepo.findAll());
+        log.info("Getting Food");
+        return foodResponseList;
+    }
+
+    @Override
+    @org.springframework.transaction.annotation.Transactional
+    public Food saveFood(Food food) {
+        return foodRepo.save(food);
+    }
+
+    @Override
+    public void deleteFoodById(Long id) {
+        foodRepo.delete(foodRepo.findById(id).get());
+    }
+
+    @Override
+    public Food findById(Long id) {
+        return foodRepo.findById(id).get();
+    }
+
+    @Override
+    public void changeImage(Long id, String url) {
+        Food food = foodRepo.findById(id).get();
+        food.setUrl(url);
+        foodRepo.save(food);
+    }
+
+
+}
